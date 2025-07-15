@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  mysqlData:
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=123
+      - MYSQL_USER=batch_user
+      - MYSQL_PASSWORD=123
+    networks:
+      - batch_network
+    volumes:
+      - ./sql.sql:/docker-entrypoint-initdb.d/sql.sql
+networks:
+  batch_network:
+    driver: bridge
